@@ -11,3 +11,6 @@ this can be changed by changing the port number in the index.js file.
 ## Files Configuration
 Rejected files will be saved in the rejected folder.
 Accepted files will be saved in the accepted folder.
+
+## GitHub 
+The project is hosted on github. You can find the source code here: https://github.com/MD2990/resumeTextParserBackEnd
