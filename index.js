@@ -195,6 +195,6 @@ app.get("/", (req, res) => {
   res.send("Resume Parser Server");
 });
 
-app.listen(port, () => {
-  console.log(`listening at http://localhost:${port}`);
+app.listen( () => {
+  console.log(`listening `);
 });
