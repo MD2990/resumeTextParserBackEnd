@@ -1,11 +1,10 @@
 {
   "folders": [
     {
-      "path": "."
+      "path": "..\\resumeTextParserFrontEnd"
     },
     {
-      "path": "..\\resumeTextParserFrontEnd"
+      "path": "."
     }
-  ],
-  "settings": {}
+  ]
 }
