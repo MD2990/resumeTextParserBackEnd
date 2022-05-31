@@ -127,6 +127,12 @@ dist
 .pnp.*
 
 # uploads
-public/uploads/rejected/*
-public/uploads/accepted/*
+!/public/uploads/accepted/.gitkeep
+public/uploads/rejected/**
 
+
+
+*
+!*/
+!.gitignore
+!.gitkeep
