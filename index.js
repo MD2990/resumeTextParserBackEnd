@@ -3,17 +3,20 @@ const serveIndex = require("serve-index");
 const fileUpload = require("express-fileupload");
 const app = express();
 const path = require("path");
-const port = 80;
+const port = process.env.PORT;
+
 var cors = require("cors");
 const pdfParse = require("pdf-parse");
-app.use(
+app.use(cors());
+
+/* app.use(
   cors({
     origin: "*",
     methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
     preflightContinue: false,
     optionsSuccessStatus: 204,
   })
-);
+); */
 
 app.use(fileUpload());
 
