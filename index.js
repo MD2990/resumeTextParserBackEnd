@@ -3,7 +3,7 @@ const serveIndex = require("serve-index");
 const fileUpload = require("express-fileupload");
 const app = express();
 const path = require("path");
-const port = 3001;
+const port = 80;
 var cors = require("cors");
 const pdfParse = require("pdf-parse");
 app.use(
@@ -195,6 +195,6 @@ app.get("/", (req, res) => {
   res.send("Resume Parser Server");
 });
 
-/* app.listen( () => {
+app.listen(port, () => {
   console.log(`listening `);
-}); */
+}); 
