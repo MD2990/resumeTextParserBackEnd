@@ -4,19 +4,11 @@ const fileUpload = require("express-fileupload");
 const app = express();
 const path = require("path");
 const port = process.env.PORT;
+const del = require("del");
 
 var cors = require("cors");
 const pdfParse = require("pdf-parse");
 app.use(cors());
-
-/* app.use(
-  cors({
-    origin: "*",
-    methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-    preflightContinue: false,
-    optionsSuccessStatus: 204,
-  })
-); */
 
 app.use(fileUpload());
 
@@ -146,9 +138,9 @@ const getTheKeywords = ({ keywords, results }) => {
 const singleFileUpload = (file, data, res) => {
   try {
     // check if the file is a pdf
-      if (file.mimetype !== "application/pdf") {
-        throw new Error("Invalid file type");
-      }
+    if (file.mimetype !== "application/pdf") {
+      throw new Error("Invalid file type");
+    }
 
     let keywords = data.split(/\s*[\s,]\s*/).filter((e) => e);
     // get the pdf file and parse it
@@ -182,6 +174,10 @@ const singleFileUpload = (file, data, res) => {
 
 app.post("/upload", async (req, res) => {
   try {
+    // clear the accepted and rejected folders
+    del.sync(["public/uploads/accepted/**", "!public"]);
+    del.sync(["public/uploads/rejected/**", "!public"]);
+
     const file = req.files.file;
     const data = req.body.key;
 
@@ -194,10 +190,19 @@ app.post("/upload", async (req, res) => {
   }
 });
 
+
+
+// clear the accepted and rejected folders on user request
+app.post("/del", async (req, res) => {
+  del.sync(["public/uploads/accepted/**", "!public"]);
+  del.sync(["public/uploads/rejected/**", "!public"]);
+  res.status(200).send({ done: true, message: "Deleted" });
+});
+
 app.get("/", (req, res) => {
   res.send("Resume Parser Server");
 });
 
 app.listen(port, () => {
   console.log(`listening `);
-}); 
+});
