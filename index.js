@@ -3,7 +3,7 @@ const serveIndex = require("serve-index");
 const fileUpload = require("express-fileupload");
 const app = express();
 const path = require("path");
-const port = process.env.PORT;
+const port = process.env.PORT || 5000;
 const del = require("del");
 
 var cors = require("cors");
@@ -181,9 +181,6 @@ app.post("/upload", async (req, res) => {
   try {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST");
-    res.setHeader(
-      "Access-Control-Allow-Headers",
-    );
     // clear the accepted and rejected folders
     del.sync(["public/uploads/accepted/**", "!public"]);
     del.sync(["public/uploads/rejected/**", "!public"]);
