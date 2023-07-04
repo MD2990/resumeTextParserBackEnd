@@ -8,7 +8,12 @@ const del = require("del");
 
 var cors = require("cors");
 const pdfParse = require("pdf-parse");
-app.use(cors());
+const corsOptions = {
+  origin: "http://localhost:3000",
+  credentials: true, //access-control-allow-credentials:true
+  optionSuccessStatus: 200,
+};
+app.use(cors(corsOptions));
 
 app.use(fileUpload());
 
@@ -174,6 +179,11 @@ const singleFileUpload = (file, data, res) => {
 
 app.post("/upload", async (req, res) => {
   try {
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST");
+    res.setHeader(
+      "Access-Control-Allow-Headers",
+    );
     // clear the accepted and rejected folders
     del.sync(["public/uploads/accepted/**", "!public"]);
     del.sync(["public/uploads/rejected/**", "!public"]);
@@ -189,8 +199,6 @@ app.post("/upload", async (req, res) => {
     res.status(500).send({ done: true, message: "Data Error", data: [] });
   }
 });
-
-
 
 // clear the accepted and rejected folders on user request
 app.post("/del", async (req, res) => {
