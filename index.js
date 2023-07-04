@@ -9,7 +9,10 @@ const del = require("del");
 var cors = require("cors");
 const pdfParse = require("pdf-parse");
 const corsOptions = {
-  origin: "https://resume-text-parser-lrlt793ru-mdad.vercel.app/",
+  origin: [
+    "https://resume-text-parser-lrlt793ru-mdad.vercel.app",
+    "https://resume-text-parser-back-end.vercel.app/upload",
+  ],
   credentials: true, //access-control-allow-credentials:true
   optionSuccessStatus: 200,
 };
