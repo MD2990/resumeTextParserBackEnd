@@ -85,17 +85,11 @@ const savaPdf = ({ file, accepted, res, data }) => {
   const fileName = path.parse(file.name).name + path.extname(file.name);
 
   // if the file is accepted then save it in the accepted folder
-  const fileAccepted = path.join(
-    __dirname,
-    "public",
-    "uploads/accepted/" + fileName
-  );
+  const fileAccepted = path.join("public", "uploads/accepted/" + fileName);
+
   // if the file is rejected then save it in the rejected folder
-  const fileRejected = path.join(
-    __dirname,
-    "public",
-    "uploads/rejected/" + fileName
-  );
+  const fileRejected = path.join("public", "uploads/rejected/" + fileName);
+
   if (accepted) {
     // if the accepted parameter is true then save the file in the accepted folder
     file.mv(fileAccepted, function (err) {
