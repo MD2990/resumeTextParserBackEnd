@@ -16,11 +16,7 @@ app.use(cors(corsOptions));
 app.use(fileUpload());
 
 app.use("/public", express.static("public/uploads"));
-app.use(
-  "/uploads",
-  express.static("public/uploads"),
-  serveIndex("public/uploads", { icons: true })
-);
+app.use("/uploads",express.static("public/uploads"),serveIndex("public/uploads", { icons: true }));
 
 const multiFileUpload = async ({ file, data, res }) => {
   const keywords = data[0].split(/\s*[\s,]\s*/).filter((e) => e);
@@ -85,10 +81,10 @@ const savaPdf = ({ file, accepted, res, data }) => {
   const fileName = path.parse(file.name).name + path.extname(file.name);
 
   // if the file is accepted then save it in the accepted folder
-  const fileAccepted = path.join("public", "uploads/accepted/" + fileName);
+  const fileAccepted = path.join("public", "/uploads/accepted/" + fileName);
 
   // if the file is rejected then save it in the rejected folder
-  const fileRejected = path.join("public", "uploads/rejected/" + fileName);
+  const fileRejected = path.join("public", "/uploads/rejected/" + fileName);
 
   if (accepted) {
     // if the accepted parameter is true then save the file in the accepted folder
