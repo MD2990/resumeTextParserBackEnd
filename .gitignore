@@ -136,3 +136,4 @@ public/uploads/rejected/**
 !*/
 !.gitignore
 !.gitkeep
+!/html/**/*

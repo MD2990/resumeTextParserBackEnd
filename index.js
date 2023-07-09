@@ -185,15 +185,11 @@ app.post("/upload", async (req, res) => {
   }
 });
 
-// clear the accepted and rejected folders on user request
-app.post("/del", async (req, res) => {
-  del.sync(["public/uploads/accepted/**", "!public"]);
-  del.sync(["public/uploads/rejected/**", "!public"]);
-  res.status(200).send({ done: true, message: "Deleted" });
-});
+app.use(express.static("html/error.html"));
 
-app.get("/", (req, res) => {
-  res.send("Resume Parser Server");
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "html/error.html"));
 });
 
 app.listen(port, () => {
